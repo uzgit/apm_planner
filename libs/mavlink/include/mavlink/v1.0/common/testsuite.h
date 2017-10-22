@@ -7433,7 +7433,7 @@ static void mavlink_test_water_depth(uint8_t system_id, uint8_t component_id, ma
         uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
         uint16_t i;
     mavlink_water_depth_t packet_in = {
-        93372036854775807ULL,73.0,963498088,963498296,963498504
+        93372036854775807ULL,73.0,101.0,129.0,157.0
     };
     mavlink_water_depth_t packet1, packet2;
         memset(&packet1, 0, sizeof(packet1));
@@ -7491,7 +7491,7 @@ static void mavlink_test_water_temperature(uint8_t system_id, uint8_t component_
         uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
         uint16_t i;
     mavlink_water_temperature_t packet_in = {
-        93372036854775807ULL,73.0,963498088,963498296,963498504
+        93372036854775807ULL,73.0,101.0,129.0,157.0
     };
     mavlink_water_temperature_t packet1, packet2;
         memset(&packet1, 0, sizeof(packet1));

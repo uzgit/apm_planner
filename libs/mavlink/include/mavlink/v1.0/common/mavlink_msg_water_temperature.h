@@ -7,9 +7,9 @@ MAVPACKED(
 typedef struct __mavlink_water_temperature_t {
  uint64_t time_usec; /*< Timestamp (micros since boot or Unix epoch)*/
  float water_temperature; /*< depth under the transducer * 100 (in feet?)*/
- int32_t latitude; /*< Latitude, expressed as degrees * 1E7*/
- int32_t longitude; /*< Longitude, expressed as degrees * 1E7*/
- int32_t altitude_amsl; /*< Altitude above mean sea level (meters)*/
+ float latitude; /*< Latitude, expressed as degrees*/
+ float longitude; /*< Longitude, expressed as degrees*/
+ float altitude_amsl; /*< Altitude above mean sea level (meters)*/
 }) mavlink_water_temperature_t;
 
 #define MAVLINK_MSG_ID_WATER_TEMPERATURE_LEN 24
@@ -17,8 +17,8 @@ typedef struct __mavlink_water_temperature_t {
 #define MAVLINK_MSG_ID_238_LEN 24
 #define MAVLINK_MSG_ID_238_MIN_LEN 24
 
-#define MAVLINK_MSG_ID_WATER_TEMPERATURE_CRC 103
-#define MAVLINK_MSG_ID_238_CRC 103
+#define MAVLINK_MSG_ID_WATER_TEMPERATURE_CRC 163
+#define MAVLINK_MSG_ID_238_CRC 163
 
 
 
@@ -29,9 +29,9 @@ typedef struct __mavlink_water_temperature_t {
     5, \
     {  { "time_usec", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_water_temperature_t, time_usec) }, \
          { "water_temperature", NULL, MAVLINK_TYPE_FLOAT, 0, 8, offsetof(mavlink_water_temperature_t, water_temperature) }, \
-         { "latitude", NULL, MAVLINK_TYPE_INT32_T, 0, 12, offsetof(mavlink_water_temperature_t, latitude) }, \
-         { "longitude", NULL, MAVLINK_TYPE_INT32_T, 0, 16, offsetof(mavlink_water_temperature_t, longitude) }, \
-         { "altitude_amsl", NULL, MAVLINK_TYPE_INT32_T, 0, 20, offsetof(mavlink_water_temperature_t, altitude_amsl) }, \
+         { "latitude", NULL, MAVLINK_TYPE_FLOAT, 0, 12, offsetof(mavlink_water_temperature_t, latitude) }, \
+         { "longitude", NULL, MAVLINK_TYPE_FLOAT, 0, 16, offsetof(mavlink_water_temperature_t, longitude) }, \
+         { "altitude_amsl", NULL, MAVLINK_TYPE_FLOAT, 0, 20, offsetof(mavlink_water_temperature_t, altitude_amsl) }, \
          } \
 }
 #else
@@ -40,9 +40,9 @@ typedef struct __mavlink_water_temperature_t {
     5, \
     {  { "time_usec", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_water_temperature_t, time_usec) }, \
          { "water_temperature", NULL, MAVLINK_TYPE_FLOAT, 0, 8, offsetof(mavlink_water_temperature_t, water_temperature) }, \
-         { "latitude", NULL, MAVLINK_TYPE_INT32_T, 0, 12, offsetof(mavlink_water_temperature_t, latitude) }, \
-         { "longitude", NULL, MAVLINK_TYPE_INT32_T, 0, 16, offsetof(mavlink_water_temperature_t, longitude) }, \
-         { "altitude_amsl", NULL, MAVLINK_TYPE_INT32_T, 0, 20, offsetof(mavlink_water_temperature_t, altitude_amsl) }, \
+         { "latitude", NULL, MAVLINK_TYPE_FLOAT, 0, 12, offsetof(mavlink_water_temperature_t, latitude) }, \
+         { "longitude", NULL, MAVLINK_TYPE_FLOAT, 0, 16, offsetof(mavlink_water_temperature_t, longitude) }, \
+         { "altitude_amsl", NULL, MAVLINK_TYPE_FLOAT, 0, 20, offsetof(mavlink_water_temperature_t, altitude_amsl) }, \
          } \
 }
 #endif
@@ -55,21 +55,21 @@ typedef struct __mavlink_water_temperature_t {
  *
  * @param time_usec Timestamp (micros since boot or Unix epoch)
  * @param water_temperature depth under the transducer * 100 (in feet?)
- * @param latitude Latitude, expressed as degrees * 1E7
- * @param longitude Longitude, expressed as degrees * 1E7
+ * @param latitude Latitude, expressed as degrees
+ * @param longitude Longitude, expressed as degrees
  * @param altitude_amsl Altitude above mean sea level (meters)
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_water_temperature_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
-                               uint64_t time_usec, float water_temperature, int32_t latitude, int32_t longitude, int32_t altitude_amsl)
+                               uint64_t time_usec, float water_temperature, float latitude, float longitude, float altitude_amsl)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_WATER_TEMPERATURE_LEN];
     _mav_put_uint64_t(buf, 0, time_usec);
     _mav_put_float(buf, 8, water_temperature);
-    _mav_put_int32_t(buf, 12, latitude);
-    _mav_put_int32_t(buf, 16, longitude);
-    _mav_put_int32_t(buf, 20, altitude_amsl);
+    _mav_put_float(buf, 12, latitude);
+    _mav_put_float(buf, 16, longitude);
+    _mav_put_float(buf, 20, altitude_amsl);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_WATER_TEMPERATURE_LEN);
 #else
@@ -95,22 +95,22 @@ static inline uint16_t mavlink_msg_water_temperature_pack(uint8_t system_id, uin
  * @param msg The MAVLink message to compress the data into
  * @param time_usec Timestamp (micros since boot or Unix epoch)
  * @param water_temperature depth under the transducer * 100 (in feet?)
- * @param latitude Latitude, expressed as degrees * 1E7
- * @param longitude Longitude, expressed as degrees * 1E7
+ * @param latitude Latitude, expressed as degrees
+ * @param longitude Longitude, expressed as degrees
  * @param altitude_amsl Altitude above mean sea level (meters)
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_water_temperature_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
-                                   uint64_t time_usec,float water_temperature,int32_t latitude,int32_t longitude,int32_t altitude_amsl)
+                                   uint64_t time_usec,float water_temperature,float latitude,float longitude,float altitude_amsl)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_WATER_TEMPERATURE_LEN];
     _mav_put_uint64_t(buf, 0, time_usec);
     _mav_put_float(buf, 8, water_temperature);
-    _mav_put_int32_t(buf, 12, latitude);
-    _mav_put_int32_t(buf, 16, longitude);
-    _mav_put_int32_t(buf, 20, altitude_amsl);
+    _mav_put_float(buf, 12, latitude);
+    _mav_put_float(buf, 16, longitude);
+    _mav_put_float(buf, 20, altitude_amsl);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_WATER_TEMPERATURE_LEN);
 #else
@@ -161,21 +161,21 @@ static inline uint16_t mavlink_msg_water_temperature_encode_chan(uint8_t system_
  *
  * @param time_usec Timestamp (micros since boot or Unix epoch)
  * @param water_temperature depth under the transducer * 100 (in feet?)
- * @param latitude Latitude, expressed as degrees * 1E7
- * @param longitude Longitude, expressed as degrees * 1E7
+ * @param latitude Latitude, expressed as degrees
+ * @param longitude Longitude, expressed as degrees
  * @param altitude_amsl Altitude above mean sea level (meters)
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
-static inline void mavlink_msg_water_temperature_send(mavlink_channel_t chan, uint64_t time_usec, float water_temperature, int32_t latitude, int32_t longitude, int32_t altitude_amsl)
+static inline void mavlink_msg_water_temperature_send(mavlink_channel_t chan, uint64_t time_usec, float water_temperature, float latitude, float longitude, float altitude_amsl)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_WATER_TEMPERATURE_LEN];
     _mav_put_uint64_t(buf, 0, time_usec);
     _mav_put_float(buf, 8, water_temperature);
-    _mav_put_int32_t(buf, 12, latitude);
-    _mav_put_int32_t(buf, 16, longitude);
-    _mav_put_int32_t(buf, 20, altitude_amsl);
+    _mav_put_float(buf, 12, latitude);
+    _mav_put_float(buf, 16, longitude);
+    _mav_put_float(buf, 20, altitude_amsl);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_WATER_TEMPERATURE, buf, MAVLINK_MSG_ID_WATER_TEMPERATURE_MIN_LEN, MAVLINK_MSG_ID_WATER_TEMPERATURE_LEN, MAVLINK_MSG_ID_WATER_TEMPERATURE_CRC);
 #else
@@ -212,15 +212,15 @@ static inline void mavlink_msg_water_temperature_send_struct(mavlink_channel_t c
   is usually the receive buffer for the channel, and allows a reply to an
   incoming message with minimum stack space usage.
  */
-static inline void mavlink_msg_water_temperature_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint64_t time_usec, float water_temperature, int32_t latitude, int32_t longitude, int32_t altitude_amsl)
+static inline void mavlink_msg_water_temperature_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint64_t time_usec, float water_temperature, float latitude, float longitude, float altitude_amsl)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char *buf = (char *)msgbuf;
     _mav_put_uint64_t(buf, 0, time_usec);
     _mav_put_float(buf, 8, water_temperature);
-    _mav_put_int32_t(buf, 12, latitude);
-    _mav_put_int32_t(buf, 16, longitude);
-    _mav_put_int32_t(buf, 20, altitude_amsl);
+    _mav_put_float(buf, 12, latitude);
+    _mav_put_float(buf, 16, longitude);
+    _mav_put_float(buf, 20, altitude_amsl);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_WATER_TEMPERATURE, buf, MAVLINK_MSG_ID_WATER_TEMPERATURE_MIN_LEN, MAVLINK_MSG_ID_WATER_TEMPERATURE_LEN, MAVLINK_MSG_ID_WATER_TEMPERATURE_CRC);
 #else
@@ -264,21 +264,21 @@ static inline float mavlink_msg_water_temperature_get_water_temperature(const ma
 /**
  * @brief Get field latitude from water_temperature message
  *
- * @return Latitude, expressed as degrees * 1E7
+ * @return Latitude, expressed as degrees
  */
-static inline int32_t mavlink_msg_water_temperature_get_latitude(const mavlink_message_t* msg)
+static inline float mavlink_msg_water_temperature_get_latitude(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int32_t(msg,  12);
+    return _MAV_RETURN_float(msg,  12);
 }
 
 /**
  * @brief Get field longitude from water_temperature message
  *
- * @return Longitude, expressed as degrees * 1E7
+ * @return Longitude, expressed as degrees
  */
-static inline int32_t mavlink_msg_water_temperature_get_longitude(const mavlink_message_t* msg)
+static inline float mavlink_msg_water_temperature_get_longitude(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int32_t(msg,  16);
+    return _MAV_RETURN_float(msg,  16);
 }
 
 /**
@@ -286,9 +286,9 @@ static inline int32_t mavlink_msg_water_temperature_get_longitude(const mavlink_
  *
  * @return Altitude above mean sea level (meters)
  */
-static inline int32_t mavlink_msg_water_temperature_get_altitude_amsl(const mavlink_message_t* msg)
+static inline float mavlink_msg_water_temperature_get_altitude_amsl(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int32_t(msg,  20);
+    return _MAV_RETURN_float(msg,  20);
 }
 
 /**
